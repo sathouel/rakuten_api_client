@@ -83,11 +83,3 @@ class Client:
     @property
     def getnewsales(self):
         return self.resources.get('getnewsales')        
-
-# 'categorymap'
-# 'producttypes'
-# 'producttypetemplate'
-# 'genericimportfile'
-# 'genericimportreport'
-# 'acceptsale'
-# 'getnewsales'
