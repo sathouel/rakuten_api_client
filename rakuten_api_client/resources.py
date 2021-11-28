@@ -3,7 +3,7 @@ import json
 from rakuten_api_client.utils import urljoin
 
 class ResourcePool:
-    def __init__(self, endpoint, session, params={}):
+    def __init__(self, endpoint, session, params):
         """Initialize the ResourcePool to the given endpoint. Eg: products"""
         self._endpoint = endpoint
         self._session = session
@@ -12,33 +12,34 @@ class ResourcePool:
     def get_url(self):
         return self._endpoint
 
-class ListableResource(ResourcePool):
+class ListableResource:
     def fetch_list(self, params={}):
-        joined_params = self._params.update(params)
-        res = self._session.get(self._endpoint, params=joined_params)
+        self._params.update(params)
+        print('Joined Params', self._params)
+        res = self._session.get(self._endpoint, params=self._params)
         return res
 
 # Pools
 
-class CategoryMapResource(ListableResource):
+class CategoryMapResource(ResourcePool, ListableResource):
     pass
 
-class ProductTypesResource(ListableResource):
+class ProductTypesResource(ResourcePool, ListableResource):
     pass
 
-class ProductTypesTemplateResource(ListableResource):
+class ProductTypesTemplateResource(ResourcePool, ListableResource):
     pass
 
-class GenericImportFileResource(ListableResource):
+class GenericImportFileResource(ResourcePool, ListableResource):
     pass
 
-class GenericImportReportResource(ListableResource):
+class GenericImportReportResource(ResourcePool, ListableResource):
     pass
 
-class AcceptSaleResource(ListableResource):
+class AcceptSaleResource(ResourcePool, ListableResource):
     pass
 
-class GetNewSalesResource(ListableResource):
+class GetNewSalesResource(ResourcePool, ListableResource):
     pass
 
 # class CreatableResource:
